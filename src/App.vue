@@ -1,23 +1,30 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+
     <router-view/>
   </div>
 </template>
 
 <script>
+import Rem from '@/assets/js/rem'
+	
+new Rem();
+
 export default {
-  name: 'App'
+  name: 'App',
+  watch:{
+			'$route'(to,from){
+//				console.log(to)
+//				console.log(from)
+				
+			}
+		},
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss" type="text/scss">
+	@import "./assets/scss/public";
+	@import "./assets/scss/util";
+
+
 </style>
