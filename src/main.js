@@ -9,6 +9,7 @@ import { XButton,Group,Cell,dateFormat } from 'vux'
 import VueI18n from 'vue-i18n';
 import messages from './i18n/i18n';
 import {localLang} from './i18n/i18n';
+import VueLazyload from 'vue-lazyload';
 
 //配置axios
 //axios.defaults.headers.get['Content-Type'] = 'application/json';
@@ -26,7 +27,14 @@ const i18n = new VueI18n({
     messages
 })
 
-
+//配置懒加载
+Vue.use(VueLazyload)
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: '',
+  loading: '',
+  attempt: 1
+})
 
 Vue.config.productionTip = false
 
