@@ -13,7 +13,7 @@
 
 <script>
 	import swiper from '../../components/swiper';
-	//获取微信第一次登录参数
+	//获取微信第一次登录参数 
 	function getUrlParam(sHref, sArgName){
           var args  = sHref.split("?");
           var retval = "";
