@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<swiper :list="banner"></swiper>
-		
+		   
 		
 		
 		
