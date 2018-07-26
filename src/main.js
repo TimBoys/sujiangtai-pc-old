@@ -21,8 +21,10 @@ Vue.component('group', Group);
 Vue.component('cell', Cell);
 Vue.component('X-img', XImg);
 
+console.log("sswww")
 //配置i18n
 Vue.use(VueI18n);
+
 const i18n = new VueI18n({
     locale: localLang, // 语言标识
     messages

@@ -2,6 +2,7 @@ $iphoneWidth : 640px;
 
 $backHeaderHeight : 1.5625rem;
 $footerHeight : 1.43rem;
+$bodyBackgroundColor:#F5F5F5;
 
 @function getIphoneWidth($n){
   @return ($n / ($iphoneWidth / 10)) *1rem;

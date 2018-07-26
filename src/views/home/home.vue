@@ -1,14 +1,14 @@
 <template>
-	<div>
+	<div class="app-init">
 		<swiper :list="banner"></swiper>
 		 
 		 <!--热门三种按钮-->
 		<div class="topFire_cont">
 			<div v-for="(tf_src) in topFire_src" class="tf_cell">
-				<a href="">
-					<x-img :src="tf_src.src" :web-src="`${tf_src.src}?type=webp`" class="tf_img"></x-img>
+				<section @click="open(tf_src.linkTo)">
+					<x-img v-lazy="tf_src.src" :web-src="`${tf_src.src}?type=webp`" class="tf_img"></x-img>
 					<div class="tf_title">{{tf_src.title}}</div>
-				</a>
+				</section>
 			</div>
 		</div>
 		<div class="bodyCont scroll-box-y">
@@ -34,11 +34,6 @@
 		</div>
 		</div>
 		
-		<div class="footer">
-			<router-link to="/HelloWorld">Go to HelloWorld</router-link>
-		{{$route.query}}
-			
-		</div>
 	</div>
 </template>
 
@@ -82,10 +77,13 @@
 				],
 				topFire_src:[{
 					src:"../../../static/images/home/tf_zhaopai.png",
-					title:"店长推荐"
+					title:"店长推荐",
+//					title:this.$t('message.hello'),
+					linkTo:"/classification"
 				},{
 					src:"../../../static/images/home/tf_dianzhang.png",
-					title:"招牌特饮"
+					title:"招牌特饮",
+					linkTo:"/classification"
 				},{
 					src:"../../../static/images/home/tf_yuding.png",
 					title:"预定下单"
@@ -119,7 +117,7 @@
 						price:"$25.00"
 					}]
 				},{
-					src:"../../../static/images/home/fire_icon.png",
+					src:"../../../static/images/home/zan_icon.png",
 					title:"店长推荐——",
 					body:[{
 						bodySrc:'../../../static/images/home/testImg1.jpg',
@@ -147,7 +145,7 @@
 						price:"$25.00"
 					}]
 				},{
-					src:"../../../static/images/home/fire_icon.png",
+					src:"../../../static/images/home/crown_icon.png",
 					title:"招牌饮品——",
 					body:[{
 						bodySrc:'../../../static/images/home/testImg1.jpg',
@@ -184,6 +182,12 @@
 			console.log(resultCode)
 			
 		},
+		methods:{
+			open(link){
+				console.log(link)
+				this.$router.openPage(link);
+			}
+		},
 		components:{
 			swiper,
 			XImg,
@@ -196,13 +200,16 @@
 </script>
 
 <style scoped="scoped" lang="scss">
+	@import "../../assets/scss/util";
+
+	
 	.bodyCont{
 		position: absolute;
 	    width: 100%;
 	    left: 0;
 	    background-color: #fff;
 	    top: 5rem;
-	    bottom: 2rem;
+	    bottom: 1.43rem;
 	}
 	
 	.topFire_cont{
@@ -210,7 +217,7 @@
 			width: calc(100% / 3);
 			height: 100%;
 			display: inline-block;
-			a{
+			section{
 				width: 100%;
 				height: 2rem;
 				display: flex;
@@ -229,6 +236,7 @@
 	
 	.detailFire_cont{
 		.df_cell{
+			background-color:$bodyBackgroundColor;
 		.df_header{
 			height: 1rem;
 			padding-left: .4rem;
@@ -255,10 +263,17 @@
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
+				color: #FDA544;
+				padding: 0.2rem;
+				@include box-sizing;
 				.dfb_img{
 					width: 2rem;
-					height: 1.4rem;
-					border-radius: 1.4rem;
+					height: 1.2rem;
+					border-radius: 1.2rem;
+					padding-bottom: 0.1rem;
+				}
+				.dfb_name,.dfb_price{
+					font-size: 0.3rem;
 				}
 			}
 			
@@ -269,10 +284,10 @@
 	
 
 	
-	.footer{
+	/*.footer{
 		position: absolute;
 		z-index: 400;
 		bottom: 0;
-	}
+	}*/
 
 </style>

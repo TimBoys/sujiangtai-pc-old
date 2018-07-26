@@ -1,23 +1,18 @@
 <template>
-	<div class="hello">
+	<div class="hello app-init">
+		<div @click="$router.go(-1)">go homes<<<<<<<< </div>
 		<div class="about-words">
-			{{ $t("message.hello") }} {{nowStatus}}
+			{{ $t("message.hello") }}
 		</div>
 
-		<group>
-			<cell title="title" value="value"></cell>
-		</group>
-		{{$route.query}}
-		<router-link to="/home">Go to HelloWorld</router-link>
-		<img v-lazy="imgSrc">
 		<swiper :list="banner"></swiper>
 	</div>
 </template>
 
 <script>
 	import { mapGetters } from 'vuex';
-	import VueDB from '../util/vue-db/vue-db-long.js'
-	import swiper from './swiper'
+	import VueDB from '../../util/vue-db/vue-db-long.js'
+	import swiper from '../../components/swiper'
 
 	var DB = new VueDB();
 
@@ -42,6 +37,7 @@
 			...mapGetters({
 				nowStatus: "nowStatus"
 			})
+
 		},
 		mounted: function() {
 			DB.setItem("name", "wjy");
@@ -75,6 +71,9 @@
 			//			测试axios---end
 
 		},
+		methods:{
+
+		},
 		components:{
 			swiper
 		}
@@ -83,5 +82,5 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss" type="text/scss">
-	@import "../assets/scss/util"; .about-words{ width: getIphoneWidth(20px); border: getIphoneWidth(20px) solid red; }
+	@import "../../assets/scss/util"; .about-words{ width: getIphoneWidth(20px); border: getIphoneWidth(20px) solid red; }
 </style>
