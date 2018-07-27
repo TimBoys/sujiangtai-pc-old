@@ -11,19 +11,19 @@
         <p class="icon">
           <span class="iconfont icon-shouye"></span>
         </p>
-        <p class="name">单季精选</p>
+        <p class="name">{{$t('BottomNav.nav_djjx')}}</p>
       </div>    	
       <div class="footer-item" :class="{ 'active': isActive('classification') }" @click="open('/classification')">
         <p class="icon">
           <span class="iconfont icon-classifition"></span>
         </p>
-        <p class="name">所有商品</p>
+        <p class="name">{{$t('BottomNav.nav_sysp')}}</p>
       </div>     	
       <div class="footer-item" :class="{ 'active': isActive('mine') }" @click="open('/mine')">
         <p class="icon">
           <span class="iconfont icon-mine"></span>
         </p>
-        <p class="name">个人中心</p>
+        <p class="name">{{$t('BottomNav.nav_grzx')}}</p>
       </div> 	
     	
     </footer>
@@ -39,7 +39,8 @@ export default {
   data(){
   	return {
   		transitionName:"slide-go",
-  		nowUrl:"/"
+  		nowUrl:"/",
+  		djjx:this.$t('home.topFire_src.title_djjx')
   	}
   },
   watch:{

@@ -8,7 +8,7 @@ import axios from "axios";
 import { XButton,Group,Cell,XImg } from 'vux'
 import VueI18n from 'vue-i18n';
 import messages from './i18n/i18n';
-import {localLang} from './i18n/i18n';
+import localLang from './i18n/localeLang';
 import VueLazyload from 'vue-lazyload';
 
 //配置axios
@@ -21,12 +21,15 @@ Vue.component('group', Group);
 Vue.component('cell', Cell);
 Vue.component('X-img', XImg);
 
-console.log("sswww")
+
+
+
+
 //配置i18n
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-    locale: localLang, // 语言标识
+    locale: localLang.localLang, // 语言标识
     messages
 })
 

@@ -1,9 +1,7 @@
 <template>
 	<div class="hello app-init">
+		<header-back :title="headTitle"></header-back>
 		<div @click="$router.go(-1)">go homes<<<<<<<< </div>
-		<div class="about-words">
-			{{ $t("message.hello") }}
-		</div>
 
 		<swiper :list="banner"></swiper>
 	</div>
@@ -13,6 +11,7 @@
 	import { mapGetters } from 'vuex';
 	import VueDB from '../../util/vue-db/vue-db-long.js'
 	import swiper from '../../components/swiper'
+	import headerBack from '../../components/header-back'
 
 	var DB = new VueDB();
 
@@ -21,6 +20,7 @@
 		data() {
 			return {
 				msg: '',
+				headTitle:"所有商品",
 				imgSrc: "https://gw.alicdn.com/tfs/TB1gBPhgZLJ8KJjy0FnXXcFDpXa-468-60.jpg",
 				banner: [{
 						src: 'http://oz3tayfme.bkt.clouddn.com/show.liluo.cc/1888a9f0a6ae807113cb428b9e01f5fe.jpg',
@@ -75,7 +75,8 @@
 
 		},
 		components:{
-			swiper
+			swiper,
+			headerBack
 		}
 	}
 </script>
