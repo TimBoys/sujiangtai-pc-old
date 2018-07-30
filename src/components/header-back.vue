@@ -1,7 +1,7 @@
 <template>
 	<div class="header-back" :class="{'active':active}">
 		<p>{{title}}</p>
-    	<span class="iconfont icon-backer myicon back" @click="$router.go(-1)"><</span>		
+    	<span class="iconfont icon-backer myicon back" @click="$router.go(-1)"></span>		
 		
 	</div>
 </template>
@@ -21,7 +21,7 @@
 			}
 		},
 		mounted(){
-			setTimeout(function(){
+			setTimeout(()=>{
 				this.active = true;
 			},10)
 		}
@@ -34,10 +34,9 @@
 		transform: translateY(0%);
 	}
 	.header-back{
-		    line-height: 2rem;
-    		padding: .2rem 0;
-    		background-color: red;
-    		/*background-color: #F2F2F2;*/
+		    line-height: 0.3rem;
+    		padding: getIphoneWidth(30px) 0;
+    		background-color: #F2F2F2;
     		@include ani01-transform;
    	 		transform: translateY(-100%);
     		@include f14px;
@@ -47,16 +46,17 @@
     		top: 0;
 		    .myicon{
       			position: absolute;
-      			width: 0.44rem;
-      			line-height: 2rem;
-      			/*top: .5rem;*/
+      			width: getIphoneWidth(88px);
+      			line-height: 0.3rem;
+      			top: getIphoneWidth(30px);
       			color: #919191;
-      			font-size: 0.58rem;
+      			font-size: 0.6rem;
 			}
     .back{
       left: 0;
     }
     p{
+    	display: inline-block;
     	left: 5rem;
     }
     .search{

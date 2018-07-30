@@ -89,7 +89,7 @@ export default {
 
 <style lang="scss" type="text/scss">
 	@import "./assets/scss/public";
-	@import "./assets/scss/util";
+ /*@import '~@/assets/font/iconfont.css'*/
 
 
 </style>
