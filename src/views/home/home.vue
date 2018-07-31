@@ -203,11 +203,10 @@
 		mounted: function() {
 
 			this.initLocalLang();
-
 			var strUrl = location.href.split('#')[0];
-			//			console.log(strUrl)
-			var resultCode = getUrlParam(strUrl, "response_type");
-			//			console.log(resultCode)
+						console.log("url:"+ location.href)
+			var resultCode = getUrlParam(strUrl, "code");
+						console.log(resultCode)
 
 		},
 		methods: {

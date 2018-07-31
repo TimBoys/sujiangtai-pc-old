@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import _ from 'lodash'
-import HelloWorld from '@/components/HelloWorld'
+import test from '@/components/test'
 import home from '@/views/home/home'
 import classification from '@/views/classification/classification'
 import mine from '@/views/mine/mine'
@@ -28,9 +28,9 @@ export default new Router({
 			redirect: '/home'
 		},
 		{
-			path: '/HelloWorld',
-			name: 'HelloWorld',
-			component: HelloWorld
+			path: '/test',
+			name: 'test',
+			component: test
 		},
 		{
 			path: '/home',

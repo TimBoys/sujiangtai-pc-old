@@ -1,16 +1,16 @@
 <template>
 	<div class="hello">
-		<div class="about-words">
+		<!--<div class="about-words">
 			{{ $t("message.hello") }} {{nowStatus}}
 		</div>
 
 		<group>
 			<cell title="title" value="value"></cell>
 		</group>
-		{{$route.query}}
 		<router-link to="/home">Go to HelloWorld</router-link>
 		<img v-lazy="imgSrc">
-		<swiper :list="banner"></swiper>
+		<swiper :list="banner"></swiper>-->
+		{{$route.query}}
 	</div>
 </template>
 
@@ -22,7 +22,7 @@
 	var DB = new VueDB();
 
 	export default {
-		name: 'HelloWorld',
+		name: 'test',
 		data() {
 			return {
 				msg: '',
