@@ -81,6 +81,7 @@ export default {
 			return this.nowUrl.indexOf(name) != -1;
 		},
 		open(link){
+
 			this.$router.openPage(link)
 		}
 	}

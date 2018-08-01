@@ -32,8 +32,8 @@
 						<p class="dfh_title">{{df_src.title}}</p>
 					</div>
 					<div class="df_body">
-						<div v-for="(dfb_body) in df_src.body" class="dfb_item">
-							<x-img v-lazy="dfb_body.bodySrc" :web-src="`${dfb_body.bodySrc}?type=webp`" class="dfb_img"></x-img>
+						<div v-for="(dfb_body) in df_src.body" class="dfb_item" >
+							<x-img v-lazy="dfb_body.bodySrc" :web-src="`${dfb_body.bodySrc}?type=webp`" class="dfb_img" @click="showModelCode"></x-img>
 							<p class="dfb_name">{{dfb_body.name}}</p>
 							<p class="dfb_price">{{dfb_body.price}}</p>
 						</div>
@@ -46,6 +46,7 @@
 
 		<!--<!--地址选择localAddr-->
 		<actionsheet v-model="isShowAs" :menus="menusAddr" @on-click-menu="selectMenu" show-cancel></actionsheet>
+		<actionsheet v-model="testUrl" :menus="testUrlData" show-cancel></actionsheet>
 
 	</div>
 </template>
@@ -87,9 +88,14 @@
 					localName: "Whiterock BC"
 				},
 				isShowAs: false,
+				testUrl:false,
 				menusAddr: {
-					menu1: "Whiterock DB",
-					menu2: "Whiterock DB2"
+					menu1: "White rock",
+					menu2: "Downtown"
+				},
+				testUrlData:{
+					menu1:"123",
+					menu2:"123",
 				},
 				banner: [{
 						src: '../../../static/images/home/testImg1.jpg',
@@ -234,6 +240,19 @@
 			},
 			selectAddr(){
 				this.isShowAs = true;
+			},
+			showModelCode(){
+				var strUrl = location.href.split('#')[0];
+				//			console.log(strUrl)
+				var resultCode = getUrlParam(strUrl, "code");
+				//			console.log(resultCode)
+
+			
+				this.testUrlData.menu1 = location.href;
+				this.testUrlData.menu2 = resultCode;
+				
+				this.testUrl = true;
+				
 			},
 			selectMenu(key){
 				console.log(key)

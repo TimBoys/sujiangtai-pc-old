@@ -20,7 +20,7 @@ Vue.prototype.$http = axios;
 Vue.component('x-button', XButton);
 Vue.component('group', Group);
 Vue.component('cell', Cell);
-Vue.component('X-img', XImg);
+
 
 
 
