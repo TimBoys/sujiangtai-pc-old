@@ -69,7 +69,7 @@ export default {
             resout = false;
           }
         }
-			if (this.isActive("classification")) {
+			if (this.isActive("classification") || this.isActive("closeAccount")) {
 				resout = true;
 			}			
 			

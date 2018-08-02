@@ -5,6 +5,7 @@ import test from '@/components/test'
 import home from '@/views/home/home'
 import classification from '@/views/classification/classification'
 import mine from '@/views/mine/mine'
+import closeAccount from '@/views/closeAccount/closeAccount'
 
 console.log(_.assignIn({
 	time:new Date().getTime()
@@ -51,6 +52,13 @@ export default new Router({
 			name: 'mine',
 		    component(resolve){
 		       require(['@/views/mine/mine.vue'], resolve)
+		    }
+		},
+		{
+			path: '/closeAccount',
+			name: 'closeAccount',
+		    component(resolve){
+		       require(['@/views/closeAccount/closeAccount.vue'], resolve)
 		    }
 		}
 

@@ -32,7 +32,7 @@
                 				<div class="shopd-pAdd">
                 					<div class="shopdpa-price">$22.00</div>
                 					<div class="shopdpa-add">
-                						 <x-icon type="ios-plus" class="cell-x-icon" ></x-icon>
+                						 <x-icon type="ios-plus" class="cell-x-icon" @click="showGuiGe"></x-icon>
                 					</div>
                 				</div>
                 			</div>
@@ -46,7 +46,7 @@
 		</div>
 	</div>
 
-
+	<!--底部结算按钮s-->
 	<div class="classification-footer absolute">
 		<div class="cf-left">
 			<div class="cfl-cont" @click="gwcMask">
@@ -56,16 +56,15 @@
 					12
 				</div>
 			</div>
-			
 		</div>
 				<div class="cf-center" @click="gwcMask">
 			总价:$33.00
 		</div>
-				<div class="cf-right">
+				<div class="cf-right" @click="open('/closeAccount')">
 			去结算
 		</div>
 	</div>
-	
+	<!--底部结算按钮e-->
 	<!--购物车-->
 	<div class="gouwuche absolute" :class="{'maskLeave':isMaskLeave}">
 		<div class="gwc-mask"  @click.self="gwcMask">
@@ -96,6 +95,67 @@
 		</div>
 	</div>
 	
+	<!--选择规格-->
+	<div class="goodsGuiGe">
+		<x-dialog v-model="isShowGuiGe" hide-on-blur :dialog-style="{'width':'90%','max-width':'90%'}">
+			<div class="guiGe-header">
+				<div class="guiGeh-title">
+					素匠泰茶
+	     		<div @click="isShowGuiGe=false" class="guiGeh-closeGuiGe">
+	          		<x-icon type="ios-close-empty" size="38"></x-icon>
+	        	</div>
+				</div>
+				
+			</div>
+			<div class="guiGe-cont">
+              <div class="checkItemBox">
+              	<divider>规格</divider>
+                 <checker v-model="guiGeDemo1" default-item-class="demo1-item" selected-item-class="demo1-item-selected" class="guiGe-checker">
+                      <checker-item :value="item" v-for="(item,index) in items1" :key="index" class="guiGe-checkerItem" @click.native="getGuige">
+                        {{item.value}}
+                      </checker-item>
+                 </checker>
+
+              </div>
+              <div class="checkItemBox">
+              	<divider>温度</divider>
+                 <checker v-model="guiGeDemo2" default-item-class="demo1-item" selected-item-class="demo1-item-selected" class="guiGe-checker">
+                      <checker-item :value="item" v-for="(item,index) in items2" :key="index" class="guiGe-checkerItem" @click.native="getGuige">
+                        {{item.value}}
+                      </checker-item>
+                 </checker>
+
+              </div>              
+              <div class="checkItemBox">
+              	<divider>糖度</divider>
+                 <checker v-model="guiGeDemo3" default-item-class="demo1-item" selected-item-class="demo1-item-selected" class="guiGe-checker">
+                      <checker-item :value="item" v-for="(item,index) in items3" :key="index" class="guiGe-checkerItem" @click.native="getGuige">
+                        {{item.value}}
+                      </checker-item>
+                 </checker>
+
+              </div>
+			
+			</div>
+			
+			
+			
+			<div class="guiGe-footer">
+				<div class="guiGef-left">
+					<span class="red guiGef-price">$22.00</span>
+					<span class="guiGef-guiGe">({{guiGeDemo1.value}}、{{guiGeDemo2.value}}、{{guiGeDemo3.value}})</span>
+				</div>
+				<div class="guiGef-right">
+					<x-button type="primary" mini style="border-radius:44px;" action-type="button"><div class="iconfont icon-gouwuche ftl-gwc">加入购物车</div></x-button>
+				</div>
+      		</div>
+			
+			
+		</x-dialog>
+
+		
+	</div>
+	
 	</div>
 </template>
 
@@ -104,7 +164,7 @@ import { mapGetters } from "vuex";
 import swiper from "../../components/swiper";
 import VueDB from "../../util/vue-db/vue-db-long.js";
 import headerBack from "../../components/header-back";
-import { XImg } from "vux";
+import { XImg,Divider } from "vux";
 import { setTimeout } from 'timers';
 
 var DB = new VueDB();
@@ -117,6 +177,7 @@ export default {
       active: 0,
       headTitle: "所有商品",
       isMaskLeave: true,
+      isShowGuiGe:false,
       offset: [],
       imgSrc: "../../../static/images/home/testImg1.jpg",
       banner: [
@@ -376,7 +437,46 @@ export default {
           gwcdirLeft: "$22.22",
           gwcdirRight: "2"
         }
-      ]
+      ],
+      guiGeDemo1: {key: '1', value: '标准'},
+      guiGeDemo2: {key: '1', value: '常温'},
+      guiGeDemo3: {key: '1', value: '半糖'},
+      items1: [{
+        key: '1',
+        value: '标准'
+      }, {
+        key: '2',
+        value: '奶沫'
+      }, {
+        key: '3',
+        value: '奶泡'
+      }],
+      items2: [{
+        key: '1',
+        value: '常温'
+      }, {
+        key: '2',
+        value: '温热'
+      }, {
+        key: '3',
+        value: '去冰'
+      }, {
+        key: '34',
+        value: '少冰'
+      }, {
+        key: '5',
+        value: '多冰'
+      }],
+      items3: [{
+        key: '1',
+        value: '半糖'
+      }, {
+        key: '2',
+        value: '无糖'
+      }, {
+        key: '3',
+        value: '多糖'
+      }],
     };
   },
   computed: {
@@ -441,12 +541,27 @@ export default {
     },
     gwcMask() {
       this.isMaskLeave = !this.isMaskLeave;
+    },
+    //展示规格
+    showGuiGe(){
+    	this.isShowGuiGe = !this.isShowGuiGe;
+    },
+    getGuige(){
+    	console.log(this.guiGeDemo1)
+    	console.log(this.guiGeDemo2)
+    	console.log(this.guiGeDemo3)
+    	
+    },
+    //展示规格end
+    open(link){
+    	this.$router.openPage(link);
     }
   },
   components: {
     swiper,
     headerBack,
-    XImg
+    XImg,
+    Divider
   },
   beforeRouteLeave(to, from, next) {
     DB.setItem("classification-left-scrollTop", this.$refs.left.scrollTop);
@@ -716,4 +831,60 @@ export default {
 .maskLeave {
   transform: translateY(100vh);
 }
+
+// 选择规格start
+.goodsGuiGe{
+  .guiGe-header{
+      text-align: center;
+      line-height: 1rem;
+      position: relative;
+      .guiGeh-closeGuiGe{
+        float:right;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+
+  }
+  .guiGe-cont{
+    max-height: 8rem;
+    height: 8rem;
+    overflow-y:scroll; 
+    border: 1px solid #BBB;
+    display: flex;
+    flex-direction: column;
+    .checkItemBox{
+    .demo1-item {
+		  border: 1px solid #ececec;
+		  padding: 5px 15px;
+		}
+	.guiGe-checker{
+		.guiGe-checkerItem{
+			margin: 0 0.3rem 0.1rem;
+			float: left;
+		}
+		}
+	.demo1-item-selected {
+	  border: 1px solid #FDA544;
+	  color: #FDA544;
+	}
+	}
+  }
+  .guiGe-footer{
+    height: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem;
+    .guiGef-left{
+      .guiGef-price{
+        font-size: 0.54rem;
+      }
+      .guiGef-guiGe{
+        font-size: 0.3rem;
+      }
+    }
+  }
+}
+
 </style>

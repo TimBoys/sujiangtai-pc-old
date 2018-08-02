@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store/store'
 import axios from "axios";
-import { XButton,Group,Cell,XImg } from 'vux'
+import { XButton,Group,Cell,XImg,XDialog,Checker, CheckerItem  } from 'vux'
 import VueI18n from 'vue-i18n';
 import messages from './i18n/i18n';
 import localLang from './i18n/localeLang';
@@ -20,7 +20,9 @@ Vue.prototype.$http = axios;
 Vue.component('x-button', XButton);
 Vue.component('group', Group);
 Vue.component('cell', Cell);
-
+Vue.component("x-dialog",XDialog);
+Vue.component('checker', Checker);
+Vue.component('checker-item', CheckerItem);
 
 
 
@@ -44,6 +46,8 @@ Vue.use(VueLazyload, {
 })
 
 Vue.config.productionTip = false
+// hack for active mobile
+document.addEventListener("touchstart", function(){}, true)
 
 /* eslint-disable no-new */
 new Vue({
