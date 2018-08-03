@@ -2,10 +2,6 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import _ from 'lodash'
 import test from '@/components/test'
-import home from '@/views/home/home'
-import classification from '@/views/classification/classification'
-import mine from '@/views/mine/mine'
-import closeAccount from '@/views/closeAccount/closeAccount'
 
 console.log(_.assignIn({
 	time:new Date().getTime()
@@ -59,6 +55,20 @@ export default new Router({
 			name: 'closeAccount',
 		    component(resolve){
 		       require(['@/views/closeAccount/closeAccount.vue'], resolve)
+		    }
+		},
+		{
+			path: '/login',
+			name: 'login',
+		    component(resolve){
+		       require(['@/views/login/login.vue'], resolve)
+		    }
+		},
+		{
+			path: '/register',
+			name: 'register',
+		    component(resolve){
+		       require(['@/views/register/register.vue'], resolve)
 		    }
 		}
 

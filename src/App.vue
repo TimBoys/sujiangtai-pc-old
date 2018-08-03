@@ -62,14 +62,14 @@ export default {
 	computed:{
 		leaveComp(){
 			var resout = false;
-			var base = ['home','classification','mine'];
+			var base = ['home','classification','mine',"login","register"];
 			
         for(var i=0; i<base.length; i++){
           if(this.isActive(base[i])){
             resout = false;
           }
         }
-			if (this.isActive("classification") || this.isActive("closeAccount")) {
+			if (this.isActive("classification") || this.isActive("closeAccount") ||  this.isActive("login") ||  this.isActive("register")) {
 				resout = true;
 			}			
 			

@@ -7,13 +7,21 @@
 	<div class="absolute closeAccountCont">
 		<!--头部三个选择s-->
 			<div class="groupCont">
-
-				<group label-width="4.5em" label-margin-right="2em" label-align="left" class="groupItem" >
-							<popup-picker title="配送方式" :data="list" v-model="value5" value-text-align="left" ></popup-picker>
+			    <tab bar-active-color="#FDA544" >
+			      <tab-item selected active-class="tabItem">到店自取</tab-item>
+			      <tab-item disabled active-class="tabItem">外卖配送</tab-item>
+			    </tab>
+				<group label-width="4.5em" label-margin-right="2em" gutter="0" label-align="left" class="groupItem" >
+						<!--<popup-picker title="配送方式" :data="list" v-model="value5" value-text-align="left" ></popup-picker>-->
+						<cell title="自取地址" value-align="left" primary="content"   value="上海市凤凰山凤凰峰">
 							
-							<popup-picker title="时间" v-model="formatDemoValue" value-text-align="left" :data="[['01','02','03'],['11','12','13']]" :display-format="format"></popup-picker>
+						</cell>
+						<cell title="自取电话" value-align="left" primary="content"  :value="myPhone" @click.native="showPhone = true">
 							
-							<popup-picker title="支付方式" :data="list2" v-model="value6" value-text-align="left" ></popup-picker>
+						</cell>
+						<popup-picker title="时间" v-model="formatDemoValue" value-text-align="left" :data="[['01','02','03'],['11','12','13']]" :display-format="format"></popup-picker>
+						<popup-picker title="支付方式" :data="list2" v-model="value6" value-text-align="left" ></popup-picker>
+						
 				</group>	
 
 			</div>
@@ -25,12 +33,11 @@
 				素匠泰茶(Whiterock)
 			</div>
 			<div class="gd-cont">
-				<div class="gdc-detail">
-					<x-img  class="gdcd-img" v-lazy="sjtLogo"></x-img>
-					
+				<div class="gdc-detail" v-for="(goodsItem,index) in allGoods">
+					<x-img  class="gdcd-img" v-lazy="goodsItem.sjtLogo"></x-img>
 					<div  class="gdcd-price">
 						<div class="gdcdp-right">
-							<div>芒果奶昔</div>
+							<div class="gdcdpr-title">芒果奶昔</div>
 							<div>+加冰+加热加冰+加热</div>
 							<div>x2</div>
 						</div>
@@ -39,6 +46,15 @@
 						</div>
 					</div>
 				</div>
+					<div class="gdc-footer">
+						<div class="gdcf-allPrice">
+							小计：$14.50
+						</div>
+						<group title="卖家留言" class="gdc-textarea">
+      						<x-textarea  name="detail" placeholder="写下想对卖家说的话" :show-counter="false" v-model="textAreaValue"></x-textarea>
+    					</group>
+					</div>
+				
 			</div>
 			
 			
@@ -57,11 +73,23 @@
 				<div class="cf-center">
 			总价:$33.00
 		</div>
-				<div class="cf-right" @click="open('/home')">
+				<div class="cf-right" @click="open('/login')">
 			提交订单
 		</div>
 	</div>
 	<!--底部结算按钮e-->
+		
+		
+	<div >
+      <confirm v-model="showPhone"
+      show-input
+      ref="confirm5"
+      :title="showPhoneTitle"
+       @on-cancel="onCancel"
+      @on-confirm="onConfirm5"
+      @on-hide="onHide">
+      </confirm>
+    </div>
 		
 	</div>
 	
@@ -69,7 +97,7 @@
 
 <script>
 import headerBack from "../../components/header-back";
-import { XImg,Divider,PopupPicker } from "vux";
+import { Confirm,XImg,Divider,PopupPicker,Tab,TabItem,XTextarea } from "vux";
 
 export default{
 	name:"closeAccount",
@@ -77,26 +105,50 @@ export default{
 		return{
 			headTitle: "提交订单",
 			sjtLogo:"../../../static/images/mine/sjtLogo.jpg",
-			list: [['堂吃', '预约', '外卖']],
 			list2: [['微信支付', '支付宝', 'VISA/Master Card',"银行卡"]],
-			value5: ['堂吃'],
 			value6: ['微信支付'],
+			showPhone:false,
+			showPhoneTitle:"更改自提电话",
 			formatDemoValue: ['01', '12'],
 			format: function (value, name) {
-	        return `${value[0]}:${value[1]}`
-	      }
+		        return `${value[0]}:${value[1]}`
+		     },
+		    myPhone:"18305626606",
+		    allGoods:[{
+		    	sjtLogo:"../../../static/images/mine/TimTest.jpeg",
+		    },{
+		    	sjtLogo:"../../../static/images/mine/TimTest.jpeg",
+		    }],
+		    textAreaValue:"sfsdfs"
 		}
 	},
 	components:{
+		Confirm,
 		headerBack,
 		XImg,
-		PopupPicker
+		PopupPicker,
+		Tab,
+		TabItem,
+		XTextarea
 	},
 	methods:{
 		//展示规格end
 	    open(link){
 	    	this.$router.openPage(link);
-	    }
+	    },
+		
+		//模态框s
+	    onHide(){
+	    	console.log("关闭模态框")
+	    },
+	    onCancel(){
+	    	console.log("取消模态框")
+	    },
+	    onConfirm5 (value) {
+	      console.log(value)
+	      this.myPhone = value;
+	    },
+	    //模态框e
 	}
 	
 	
@@ -164,11 +216,13 @@ export default{
 /*中间*/
 .closeAccountCont{
 	width: 100%;
-	top: 0.9rem;
+	top: 1.2rem;
 	bottom:  $footerHeight;
 	overflow-y: auto;
-	.groupCont{
-
+		.groupCont{
+			.tabItem{
+				color: #FDA544;
+			}
 	}
 	.goodsDetail{
 		margin-top: 0.4rem;
@@ -183,14 +237,14 @@ export default{
 		}
 		.gd-cont{
 			.gdc-detail{
-					height: 2.4rem;
+					height: 2rem;
 					display: flex;
 					font-size: 0.32rem;
 				.gdcd-img{
-					width: 2rem;
-					height: 2rem;
+					width: 1.6rem;
+					height: 1.6rem;
 					padding: 0.2rem;
-					border-radius: 50%;
+					/*border-radius: 50%;*/
 				}	
 				.gdcd-price{
 					width: calc(10rem - 2.4rem);
@@ -198,14 +252,38 @@ export default{
 					line-height: 1rem;
 					display: flex;
 					justify-content: space-between;		
+					color: #B2B2B2;
 					.gdcdp-right{
-						line-height: 0.6rem;
+						display: flex;
+						flex-direction: column;
+						div{
+							height: 0.5rem;
+						}
+						.gdcdpr-title{
+							height: 0.6rem;
+							font-size: 0.42rem;
+							color: #666;
+						}
+
 					}
 					.gdcdp-plus{
 						display: flex;
-						justify-content: space-between;							
+						justify-content: space-between;		
+						padding-right: 0.6rem;		
+						font-size: 0.42rem;		
 					}			
 				}			
+			}
+		}
+		.gdc-footer{
+				padding:0  0.2rem 0.2rem 0.2rem ;
+			.gdcf-allPrice{
+				padding-right: 0.6rem;				
+				padding-bottom: 0.2rem;				
+				text-align: right;
+			}
+			.gdc-textarea{
+				border: 1px solid #D0D6D6;
 			}
 		}
 	}

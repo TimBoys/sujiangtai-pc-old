@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import store from './store/store'
 import axios from "axios";
-import { XButton,Group,Cell,XImg,XDialog,Checker, CheckerItem  } from 'vux'
+import { XButton,Group,Cell,XImg,XDialog,Checker, CheckerItem,Confirm,XInput  } from 'vux'
 import VueI18n from 'vue-i18n';
 import messages from './i18n/i18n';
 import localLang from './i18n/localeLang';
@@ -23,6 +23,8 @@ Vue.component('cell', Cell);
 Vue.component("x-dialog",XDialog);
 Vue.component('checker', Checker);
 Vue.component('checker-item', CheckerItem);
+Vue.component('confirm', Confirm)
+Vue.component('x-input', XInput)
 
 
 
