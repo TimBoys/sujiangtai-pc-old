@@ -44,6 +44,7 @@
 							</x-img>
 						</cell>-->						
 				</group>
+				<x-button type="warn" action-type="reset" class="legout" @click.native="legout">退出</x-button>
 			</div>
 			
 			 <toast  v-model="showPositionValue" width="5rem"  type="text" :time="2000" is-show-mask :text="$t('reminder.comingSoon')" :position="position"></toast>
@@ -157,6 +158,13 @@
 					console.log(err)
 				})
 			},		    
+			//退出
+			legout(){
+				DB.removeItem("telUserNo");
+				
+				
+				this.$router.openPage("/login");
+			}
 		},
 		components:{
 			XImg,
@@ -256,6 +264,10 @@
 			vertical-align: middle;
 			padding-right: 0.4rem;
 		}
+		}
+		.legout{
+			width: 6rem;
+			margin: 2rem 0 2rem 2rem;
 		}
 	}
 	
